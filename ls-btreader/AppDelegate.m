@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FileReader.h"
-#import "BencodeParser.h"
+#import "BitTorrent.h"
 
 @interface AppDelegate ()
 
@@ -18,15 +18,15 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    NSString* torrentPath = @"/Users/wrench/Desktop/torrents/Influence.torrent";
+    NSString* torrentPath = @"/Users/wrench/Desktop/torrents/office-windows.torrent";
 
     NSString* contents = [[[FileReader alloc] init] stringContentsAtFilepath:torrentPath];
-    
-//    NSLog(@"%@", contents);
     
     
     id dict = [BencodeParser parseString:contents].element;
  
+    BitTorrent* bt = [BitTorrent initWithTorrentInfoDictionary:dict];
+    
     NSLog(@"yup)");
 }
 

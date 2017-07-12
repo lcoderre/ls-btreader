@@ -27,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		8C26DE851F16662B0038871E /* NSString+Bencode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Bencode.h"; sourceTree = "<group>"; };
+		8C8F167C1F16B3C300139CAD /* BitTorrent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitTorrent.h; sourceTree = "<group>"; };
 		8CAEB0751F15C905003AD140 /* ls-btreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ls-btreader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAEB0781F15C905003AD140 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8CAEB0791F15C905003AD140 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -40,7 +41,7 @@
 		8CAEB08F1F15C906003AD140 /* ls_btreaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ls_btreaderTests.m; sourceTree = "<group>"; };
 		8CAEB0911F15C906003AD140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CAEB09A1F15CD07003AD140 /* FileReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileReader.h; sourceTree = "<group>"; };
-		8CAEB09B1F15D38B003AD140 /* BencodeParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BencodeParser.h; sourceTree = "<group>"; };
+		8CAEB09B1F15D38B003AD140 /* Bencode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bencode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +86,9 @@
 				8CAEB0781F15C905003AD140 /* AppDelegate.h */,
 				8CAEB0791F15C905003AD140 /* AppDelegate.m */,
 				8CAEB09A1F15CD07003AD140 /* FileReader.h */,
-				8CAEB09B1F15D38B003AD140 /* BencodeParser.h */,
+				8CAEB09B1F15D38B003AD140 /* Bencode.h */,
 				8C26DE851F16662B0038871E /* NSString+Bencode.h */,
+				8C8F167C1F16B3C300139CAD /* BitTorrent.h */,
 				8CAEB07E1F15C906003AD140 /* ViewController.h */,
 				8CAEB07F1F15C906003AD140 /* ViewController.m */,
 				8CAEB0811F15C906003AD140 /* Assets.xcassets */,
