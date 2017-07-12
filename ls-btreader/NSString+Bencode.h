@@ -64,6 +64,39 @@
     return string;
 }
 
+
+
+- (NSNumber*) parseFirstIntValue {
+    NSError *error = NULL;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(-?\\d+)"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
+    
+    NSString* integerAsString = [self substringWithRange:matchRange];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *number = [f numberFromString:integerAsString];
+    
+    return number;
+}
+
+- (NSString*) getRestAfterIntValue {
+    NSError *error = NULL;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(-?\\d+)"
+                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                             error:&error];
+    
+    NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
+    
+    return [self substringFromIndex:matchRange.length +1];
+}
+
+
 @end
 
 #endif /* NSString_Bencode_h */

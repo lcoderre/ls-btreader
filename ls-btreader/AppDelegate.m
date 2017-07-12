@@ -18,7 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    NSString* torrentPath = @"/Users/wrench/Desktop/example.torrent";
+    NSString* torrentPath = @"/Users/wrench/Desktop/torrents/Influence.torrent";
 
     NSString* contents = [[[FileReader alloc] init] stringContentsAtFilepath:torrentPath];
     
@@ -26,7 +26,8 @@
     
     
     id dict = [BencodeParser parseString:contents].element;
-    
+ 
+    NSLog(@"yup)");
 }
 
 

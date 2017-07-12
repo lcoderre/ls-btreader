@@ -96,8 +96,13 @@
         return ret;
         
     } else if ([input startsWith:'i']){ // integer
-        NSLog(@"has to implement");
+        NSNumber* intValue = [[input rest] parseFirstIntValue];
+        NSString* rest = [[input rest] getRestAfterIntValue];
         
+        
+        BencodeParsingResult* ret = [[BencodeParsingResult alloc] init];
+        [ret setElement:intValue Rest:rest];
+        return ret;
     } else { // normal string
         NSString* strValue = [input parseFirstStringValue];
         NSString* rest = [input getRestAfterStringValue];
