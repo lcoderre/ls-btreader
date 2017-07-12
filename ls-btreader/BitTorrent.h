@@ -19,11 +19,16 @@
 
 + (BitTorrent*) initWithTorrentInfoDictionary: (NSDictionary*) dict ;
 
+
 - (NSArray *) urlTrackers ;
 - (NSString *) torrentName ;
 - (NSDate *) creationDate ;
+- (NSArray *) files;
+
 - (NSNumber *) pieceLength ;
 - (NSArray *) pieces ;
+
+- (NSString* ) availableInfos;
 
 @end
 
@@ -135,6 +140,74 @@
     return nil;
 }
 
+- (NSArray *) files {
+    NSDictionary* infoDict = [self.torrentInfo objectForKey:@"info"];
+    
+    if (infoDict != nil) {
+        NSArray* files = [infoDict objectForKey:@"files"];
+        
+        if (files != nil) {
+            return files;
+        } else {
+            NSLog(@"THROW? No 'files' key-value in 'info' dictionary");
+        }
+    } else {
+        NSLog(@"THROW? No 'info' dictionary");
+    }
+    
+    return nil;
+}
+
+- (NSString*) availableInfos {
+    NSString* ret = @"";
+    
+    NSString* torrentName = [self torrentName];
+    if (torrentName != nil) {
+        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Name: %@", torrentName]];
+    }
+    ret = [ret stringByAppendingString:@"\n\n"];
+
+    NSDate* creationDate = [self creationDate];
+    if (creationDate != nil) {
+        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Created on: %@", creationDate]];
+    } else {
+        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Created on: -"]];
+    }
+    ret = [ret stringByAppendingString:@"\n\n"];
+
+    
+    NSArray* urlTrackers = [self urlTrackers];
+    if (urlTrackers != nil) {
+        NSString* content = [NSString stringWithFormat:@"URL Trackers: \n"];
+        content = [content stringByAppendingString:[urlTrackers componentsJoinedByString:@"\n"]];
+        ret = [ret stringByAppendingString:content];
+    }
+    ret = [ret stringByAppendingString:@"\n\n"];
+
+    NSArray* filesArray = [self files];
+    if (filesArray != nil) {
+        NSString* content = [NSString stringWithFormat:@"Files: \n"];
+        NSArray* formattedFilesArray = [[NSArray alloc] initWithObjects:@"", nil];
+        for (NSDictionary* fileDict in filesArray) {
+            formattedFilesArray = [formattedFilesArray arrayByAddingObject:[fileDict valueForKey:@"path"]];
+        }
+        content = [content stringByAppendingString:[formattedFilesArray componentsJoinedByString:@"\n-> "]];
+        ret = [ret stringByAppendingString:content];
+    }
+    ret = [ret stringByAppendingString:@"\n\n"];
+
+    
+    NSNumber* pieceLength = [self pieceLength];
+    if (pieceLength != nil) {
+        NSString* content = [NSString stringWithFormat:@"Piece length: %@", pieceLength];
+        ret = [ret stringByAppendingString:content];
+    } else {
+        ret = [ret stringByAppendingString:@"Piece length: -"];
+    }
+    ret = [ret stringByAppendingString:@"\n\n"];
+
+    return ret;
+}
 
 @end
 

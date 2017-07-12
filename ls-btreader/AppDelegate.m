@@ -18,7 +18,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    NSString* torrentPath = @"/Users/wrench/Desktop/torrents/office-windows.torrent";
+    NSString* torrentPath = @"/Users/wrench/Desktop/torrents/Influence.torrent";
 
     NSString* contents = [[[FileReader alloc] init] stringContentsAtFilepath:torrentPath];
     
@@ -27,7 +27,7 @@
  
     BitTorrent* bt = [BitTorrent initWithTorrentInfoDictionary:dict];
     
-    NSLog(@"yup)");
+    NSLog([bt availableInfos]);
 }
 
 
