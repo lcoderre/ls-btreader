@@ -25,7 +25,7 @@
 //    NSLog(@"%@", contents);
     
     
-    [[[BencodeParser alloc] init] parseString:contents];
+    id dict = [BencodeParser parseString:contents].element;
     
 }
 
