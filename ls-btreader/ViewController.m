@@ -73,7 +73,6 @@
             BitTorrent* bt = [BitTorrent initWithTorrentInfoDictionary:dict];
             [self.infoView refreshWithTorrentInfo:bt];
             [_errorLabel setStringValue:@""];
-
         } @catch (NSException *exception) {
             [_errorLabel setStringValue: [NSString stringWithFormat:@"%@ - %@", exception.name, exception.description]];
         } @finally {

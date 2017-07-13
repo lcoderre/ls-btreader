@@ -23,17 +23,27 @@
 @implementation BencodeParser
 
 + (id) decode: (NSString*) input {
-    BencodeParsingResult* result = [BencodeParser parseString:input];
     
-    if (result.rest && result.rest.length > 0) {
+    @try {
+        BencodeParsingResult* result = [BencodeParser parseString:input];
+        
+        if (result.rest && result.rest.length > 0) {
+            NSException* myException = [NSException
+                                        exceptionWithName:@"BencodeDecodingException"
+                                        reason:@"Input is erroneous or decoding failed."
+                                        userInfo:nil];
+            [myException raise];
+        }
+        
+        return result.element;
+    } @catch (NSException *exception) {
         NSException* myException = [NSException
                                     exceptionWithName:@"BencodeDecodingException"
                                     reason:@"Input is erroneous or decoding failed."
                                     userInfo:nil];
-         [myException raise];
+        [myException raise];
     }
     
-    return result.element;
 }
 
 + (BencodeParsingResult*) parseString: (NSString*) input{
