@@ -10,9 +10,12 @@
 
 #import "FileReader.h"
 #import "BitTorrent.h"
+#import "MetaInfoView.h"
 
 @interface ViewController()
-@property (weak, nonatomic) NSTextView* textView;
+
+@property (strong, nonatomic) MetaInfoView* infoView;
+@property (strong, nonatomic) NSButton* selectionButton;
 @end
 
 
@@ -20,26 +23,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGRect frame = CGRectMake(20, 20, 70, 25);
-    NSButton* selectionButton = [[NSButton alloc] initWithFrame: frame];
+    _selectionButton = [[NSButton alloc] init];
     
-    [self.view addSubview:selectionButton];
+    [self.view addSubview:_selectionButton];
+    [_selectionButton setTitle:@"Select file"];
+    [_selectionButton setTarget:self];
+    [_selectionButton setAction:@selector(selectFile)];
     
-    [selectionButton setTitle:@"Select file"];
-    [selectionButton setTarget:self];
-    [selectionButton setAction:@selector(selectFile)];
+    _infoView = [[MetaInfoView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_infoView];
     
-    
-    NSTextView* textView = [[NSTextView alloc] initWithFrame:CGRectMake(120, 20, 300, 400)];
-    
-    
-    [textView setEditable:NO];
-    
-    [self.view addSubview:textView];
-    
-    self.textView = textView;
-    
+    [self.view setNeedsLayout:YES];
 }
+
+- (void) viewWillLayout {
+    [super viewWillLayout];
+    
+    CGRect frame = CGRectMake(10, 10, 70, 25);
+    [_selectionButton setFrame:frame];
+    
+    [_infoView setFrame:CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height - 80)];
+}
+
 
 - (void) selectFile {
     NSOpenPanel *panel = [NSOpenPanel openPanel];
@@ -58,7 +63,8 @@
         
         BitTorrent* bt = [BitTorrent initWithTorrentInfoDictionary:dict];
         
-        [self.textView setString:[bt availableInfos]];
+        [self.infoView refreshWithTorrentInfo:bt];
+//        [self.textView setString:[bt availableInfos]];
     }
 }
 
