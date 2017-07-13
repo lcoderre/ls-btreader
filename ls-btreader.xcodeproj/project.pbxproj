@@ -12,6 +12,7 @@
 		8C4F862F1F17C5080024772E /* Bencode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F862E1F17C5080024772E /* Bencode.m */; };
 		8C4F86351F17F08E0024772E /* NSString+Bencode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F86341F17F08E0024772E /* NSString+Bencode.m */; };
 		8C4F86371F17F3590024772E /* BencodeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F86361F17F3590024772E /* BencodeTests.m */; };
+		8C4F863B1F17F9B60024772E /* BitTorrentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4F863A1F17F9B60024772E /* BitTorrentTests.m */; };
 		8CAEB07A1F15C906003AD140 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB0791F15C905003AD140 /* AppDelegate.m */; };
 		8CAEB07D1F15C906003AD140 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB07C1F15C906003AD140 /* main.m */; };
 		8CAEB0801F15C906003AD140 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAEB07F1F15C906003AD140 /* ViewController.m */; };
@@ -38,6 +39,7 @@
 		8C4F86331F17F08E0024772E /* NSString+Bencode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Bencode.h"; sourceTree = "<group>"; };
 		8C4F86341F17F08E0024772E /* NSString+Bencode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Bencode.m"; sourceTree = "<group>"; };
 		8C4F86361F17F3590024772E /* BencodeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BencodeTests.m; sourceTree = "<group>"; };
+		8C4F863A1F17F9B60024772E /* BitTorrentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitTorrentTests.m; sourceTree = "<group>"; };
 		8C8F167C1F16B3C300139CAD /* BitTorrent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BitTorrent.h; sourceTree = "<group>"; };
 		8CAEB0751F15C905003AD140 /* ls-btreader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ls-btreader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CAEB0781F15C905003AD140 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				8CAEB08F1F15C906003AD140 /* ls_btreaderTests.m */,
+				8C4F863A1F17F9B60024772E /* BitTorrentTests.m */,
 				8C4F86361F17F3590024772E /* BencodeTests.m */,
 				8CAEB0911F15C906003AD140 /* Info.plist */,
 			);
@@ -250,6 +253,7 @@
 			files = (
 				8C4F86371F17F3590024772E /* BencodeTests.m in Sources */,
 				8CAEB0901F15C906003AD140 /* ls_btreaderTests.m in Sources */,
+				8C4F863B1F17F9B60024772E /* BitTorrentTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
