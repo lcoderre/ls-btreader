@@ -10,6 +10,7 @@
 
 @interface ViewController : NSViewController
 
+- (void) refreshWithErrorMessage: (NSString*) message;
 
 @end
 

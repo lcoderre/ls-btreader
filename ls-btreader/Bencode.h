@@ -9,23 +9,10 @@
 #ifndef BencodeParser_h
 #define BencodeParser_h
 
-#import "NSString+Bencode.h"
-
-@interface BencodeParsingResult : NSObject
-
-@property NSString* rest;
-@property id element;
-
-- (void) setElement: (id) element Rest:(NSString*) rest;
-
-@end
-
-
-
 
 @interface BencodeParser : NSObject
 
-+ (BencodeParsingResult*) parseString: (NSString*) input;
++ (id) decode: (NSString*) input;
 
 @end
 

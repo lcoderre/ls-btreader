@@ -14,8 +14,18 @@
 
 + (BitTorrent*) initWithTorrentInfoDictionary: (NSDictionary*) dict {
     BitTorrent* bt = [[BitTorrent alloc] init];
+    
     bt.torrentInfo = dict;
     return bt;
+}
+
+- (void) throwNoInfoDict {
+    
+    NSException* noInfoDict = [NSException
+                               exceptionWithName:@"TorrentSpecificationNotMet"
+                               reason:@"No 'info' dictionary found during processing of input"
+                               userInfo:nil];
+    [noInfoDict raise];
 }
 
 - (NSArray*) urlTrackers {
@@ -30,7 +40,6 @@
         }
     }
     
-    NSLog(@"THROW? No announce or announce-list in torrent info dictionary");
     return nil;
 }
 
@@ -46,7 +55,7 @@
             NSLog(@"THROW? No 'name' key-value in 'info' dictionary");
         }
     } else {
-        NSLog(@"THROW? No 'info' dictionary");
+        [self throwNoInfoDict];
     }
     
     return nil;
@@ -97,7 +106,7 @@
             NSLog(@"THROW? No 'piece length' key-value in 'info' dictionary");
         }
     } else {
-        NSLog(@"THROW? No 'info' dictionary");
+        [self throwNoInfoDict];
     }
     
     return nil;
@@ -130,7 +139,7 @@
             NSLog(@"THROW? No 'pieces' key-value in 'info' dictionary");
         }
     } else {
-        NSLog(@"THROW? No 'info' dictionary");
+        [self throwNoInfoDict];
     }
     
     return nil;
@@ -148,12 +157,14 @@
             NSLog(@"THROW? No 'files' key-value in 'info' dictionary");
         }
     } else {
-        NSLog(@"THROW? No 'info' dictionary");
+        [self throwNoInfoDict];
     }
     
     return nil;
 }
 
+
+// debug method. Not relevant to API
 - (NSString*) availableInfos {
     NSString* ret = @"";
     

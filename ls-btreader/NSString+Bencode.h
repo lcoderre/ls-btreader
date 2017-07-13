@@ -13,6 +13,8 @@
 @implementation NSString (Bencode)
 
 - (bool) startsWith: (unichar) character {
+    if (self.length == 0){ return false; }
+    
     unichar firstChar = [self characterAtIndex:0];
 
     return firstChar == character;
@@ -28,6 +30,14 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)"
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
+    if (error) {
+        
+        NSException* myException = [NSException
+                                    exceptionWithName:@"BencodeDecodingException"
+                                    reason:@"Could not match regex and find string length."
+                                    userInfo:nil];
+        [myException raise];
+    }
     
     NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
     
@@ -49,6 +59,14 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d+)"
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
+    if (error) {
+        
+        NSException* myException = [NSException
+                                    exceptionWithName:@"BencodeDecodingException"
+                                    reason:@"Could not match regex and find string length."
+                                    userInfo:nil];
+        [myException raise];
+    }
     
     NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
     
@@ -73,6 +91,16 @@
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
     
+    if (error) {
+
+            NSException* myException = [NSException
+                                        exceptionWithName:@"BencodeDecodingException"
+                                        reason:@"Could not match integer regex to input"
+                                        userInfo:nil];
+            [myException raise];
+
+    }
+    
     NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
     
     NSString* integerAsString = [self substringWithRange:matchRange];
@@ -90,10 +118,19 @@
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(-?\\d+)"
                                                                            options:NSRegularExpressionCaseInsensitive
                                                                              error:&error];
+    if (error) {
+        
+        NSException* myException = [NSException
+                                    exceptionWithName:@"BencodeDecodingException"
+                                    reason:@"Could not match integer regex to input"
+                                    userInfo:nil];
+        [myException raise];
+        
+    }
     
     NSRange matchRange = [regex rangeOfFirstMatchInString:self options:0 range:NSMakeRange(0, [self length])];
     
-    return [self substringFromIndex:matchRange.length +1];
+    return [self substringFromIndex:matchRange.length + 1];
 }
 
 
