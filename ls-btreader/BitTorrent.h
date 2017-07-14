@@ -24,10 +24,6 @@
 - (NSNumber *) pieceLength ;
 - (NSArray *) pieces ;
 
-- (NSString* ) availableInfos;
-
 @end
-
-
 
 #endif /* BitTorrent_h */

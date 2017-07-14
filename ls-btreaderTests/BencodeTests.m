@@ -90,4 +90,39 @@
     XCTAssertThrows([BencodeParser decode:@"sd5:hello5:world5:halloi5ee"]);
     XCTAssertThrows([BencodeParser decode:@"d5:hello4:world5:halloi5ee"]);
 }
+
+
+- (void) testFullDictFromString {
+    NSString* input = @"d13:announce-listll8:tracker1el8:tracker2el8:tracker3ee4:infod13:file-durationli2738ei2186ee5:filesld6:lengthi27386074e4:pathl6:1A.mp3eed6:lengthi21862852e4:pathl6:1B.mp3eee4:name9:Influence12:piece lengthi131072eee";
+    
+    id result = [BencodeParser decode:input];
+    NSDictionary* dictionary = @{
+                                 @"announce-list" : @[
+                                         @"tracker1",
+                                         @"tracker2",
+                                         @"tracker3"
+                                         ],
+                                 @"info" :     @{
+                                         @"file-duration" : @[
+                                                 @2738,
+                                                 @2186
+                                                 ],
+                                         @"files" : @[
+                                                 @{
+                                                     @"length" : @27386074,
+                                                     @"path" : @"1A.mp3"
+                                                     },
+                                                 @{
+                                                     @"length" : @21862852,
+                                                     @"path" : @"1B.mp3"
+                                                     }
+                                                 ],
+                                         @"name" : @"Influence",
+                                         @"piece length" : @131072
+                                         }
+                                 };
+    
+    XCTAssert([result isEqual:dictionary]);
+    
+}
 @end
