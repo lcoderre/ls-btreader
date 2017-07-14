@@ -57,7 +57,7 @@
     BitTorrent* bt = [BitTorrent initWithTorrentInfoDictionary:input];
     
     XCTAssert([bt.torrentName isEqualToString:@"un beau nom"]);
-    XCTAssertThrows([BitTorrent initWithTorrentInfoDictionary:@{}].torrentName); // No info dict
+    XCTAssertNil([BitTorrent initWithTorrentInfoDictionary:@{}].torrentName); // No info dict
 }
 
 - (void) testFewProperties {
