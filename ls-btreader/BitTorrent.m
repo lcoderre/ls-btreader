@@ -19,15 +19,6 @@
     return bt;
 }
 
-- (void) throwNoInfoDict {
-    
-    NSException* noInfoDict = [NSException
-                               exceptionWithName:@"TorrentSpecificationNotMet"
-                               reason:@"No 'info' dictionary found during processing of input"
-                               userInfo:nil];
-    [noInfoDict raise];
-}
-
 - (NSArray*) urlTrackers {
     NSArray* announceList = [self.torrentInfo objectForKey:@"announce-list"];
     
@@ -51,11 +42,7 @@
         
         if (name != nil) {
             return name;
-        } else {
-            NSLog(@"THROW? No 'name' key-value in 'info' dictionary");
         }
-    } else {
-        [self throwNoInfoDict];
     }
     
     return nil;
@@ -70,11 +57,7 @@
         
         if (creationDate != nil) {
             return creationDate;
-        } else {
-            NSLog(@"THROW? Could not make a NSDate from value %@", creationTimestamp);
         }
-    } else {
-        NSLog(@"THROW? No 'creation date' key-value");
     }
     
     return nil;
@@ -86,8 +69,6 @@
     
     if (createdBy != nil) {
         return createdBy;
-    } else {
-        NSLog(@"THROW? No 'created by' key-value");
     }
     
     return nil;
@@ -102,11 +83,7 @@
         
         if (pieceLength != nil) {
             return pieceLength;
-        } else {
-            NSLog(@"THROW? No 'piece length' key-value in 'info' dictionary");
         }
-    } else {
-        [self throwNoInfoDict];
     }
     
     return nil;
@@ -135,11 +112,7 @@
             }
             
             return pieces;
-        } else {
-            NSLog(@"THROW? No 'pieces' key-value in 'info' dictionary");
         }
-    } else {
-        [self throwNoInfoDict];
     }
     
     return nil;
@@ -153,67 +126,10 @@
         
         if (files != nil) {
             return files;
-        } else {
-            NSLog(@"THROW? No 'files' key-value in 'info' dictionary");
         }
-    } else {
-        [self throwNoInfoDict];
     }
     
     return nil;
-}
-
-
-// debug method. Not relevant to API
-- (NSString*) availableInfos {
-    NSString* ret = @"";
-    
-    NSString* torrentName = [self torrentName];
-    if (torrentName != nil) {
-        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Name: %@", torrentName]];
-    }
-    ret = [ret stringByAppendingString:@"\n\n"];
-    
-    NSDate* creationDate = [self creationDate];
-    if (creationDate != nil) {
-        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Created on: %@", creationDate]];
-    } else {
-        ret = [ret stringByAppendingString:[NSString stringWithFormat:@"Created on: -"]];
-    }
-    ret = [ret stringByAppendingString:@"\n\n"];
-    
-    
-    NSArray* urlTrackers = [self urlTrackers];
-    if (urlTrackers != nil) {
-        NSString* content = [NSString stringWithFormat:@"URL Trackers: \n"];
-        content = [content stringByAppendingString:[urlTrackers componentsJoinedByString:@"\n"]];
-        ret = [ret stringByAppendingString:content];
-    }
-    ret = [ret stringByAppendingString:@"\n\n"];
-    
-    NSArray* filesArray = [self files];
-    if (filesArray != nil) {
-        NSString* content = [NSString stringWithFormat:@"Files: \n"];
-        NSArray* formattedFilesArray = [[NSArray alloc] initWithObjects:@"", nil];
-        for (NSDictionary* fileDict in filesArray) {
-            formattedFilesArray = [formattedFilesArray arrayByAddingObject:[fileDict valueForKey:@"path"]];
-        }
-        content = [content stringByAppendingString:[formattedFilesArray componentsJoinedByString:@"\n-> "]];
-        ret = [ret stringByAppendingString:content];
-    }
-    ret = [ret stringByAppendingString:@"\n\n"];
-    
-    
-    NSNumber* pieceLength = [self pieceLength];
-    if (pieceLength != nil) {
-        NSString* content = [NSString stringWithFormat:@"Piece length: %@", pieceLength];
-        ret = [ret stringByAppendingString:content];
-    } else {
-        ret = [ret stringByAppendingString:@"Piece length: -"];
-    }
-    ret = [ret stringByAppendingString:@"\n\n"];
-    
-    return ret;
 }
 
 @end
